@@ -1,21 +1,35 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import { store } from './app/store';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
+import App from 'App';
+import { store } from 'store';
+import { CssBaseline, createTheme, ThemeProvider } from '@mui/material';
+import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.render(
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+const theme = createTheme({
+  palette: {
+    background: {
+      default: '#f3f3f3',
+    },
+  },
+});
+
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <App />
+        </ThemeProvider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById('root')
 );
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
