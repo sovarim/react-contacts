@@ -13,16 +13,16 @@ const Auth = () => {
     password: '',
   });
 
-  const handleChange: ChangeEventHandler<HTMLFormElement> = (e) => {
+  const onChange: ChangeEventHandler<HTMLFormElement> = (e) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
     login(formData);
   };
 
-  const handleShowPassword = () => {
+  const onShowPassword = () => {
     setShowPassword((prev) => !prev);
   };
 
@@ -31,7 +31,7 @@ const Auth = () => {
       <Typography variant="h5" align="center" sx={{ mb: 1 }}>
         Авторизация
       </Typography>
-      <Stack spacing={1.5} component="form" onChange={handleChange} onSubmit={handleSubmit}>
+      <Stack spacing={1.5} component="form" onChange={onChange} onSubmit={onSubmit}>
         <TextField fullWidth name="username" label="Имя пользователя" value={formData.username} />
         <TextField
           fullWidth
@@ -40,7 +40,7 @@ const Auth = () => {
           type={showPassword ? 'test' : 'password'}
           InputProps={{
             endAdornment: (
-              <IconButton onClick={handleShowPassword}>
+              <IconButton onClick={onShowPassword}>
                 {showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
             ),

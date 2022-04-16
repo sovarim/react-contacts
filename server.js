@@ -9,6 +9,25 @@ const middlewares = jsonServer.defaults();
 const { db } = router;
 
 const SECRET_KEY = 'SECRET_KEY';
+const Bearer = 'Bearer';
+
+const isBearer = (tokenType) => {
+  return tokenType === Bearer;
+};
+
+const checkAuthMiddleware = (req, res, next) => {
+  const [tokenType, token] = req.headers.authorization?.split(' ') || ['', ''];
+  if (!token || !isBearer(tokenType)) {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+
+  try {
+    jwt.verify(token, SECRET_KEY);
+  } catch {
+    return res.status(401).json({ message: 'Invalid token' });
+  }
+  next();
+};
 
 server.use(middlewares);
 server.use(jsonServer.bodyParser);
@@ -27,9 +46,11 @@ server.post('/auth', (req, res) => {
   }
   const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, {
     algorithm: 'HS256',
+    expiresIn: '1d',
   });
   res.json({ token });
 });
+server.use(checkAuthMiddleware);
 server.use(router);
 server.listen(8001, () => {
   // eslint-disable-next-line no-console

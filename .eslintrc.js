@@ -28,5 +28,6 @@ module.exports = {
     'arrow-body-style': 'off',
     'import/extensions': 'off',
     'no-param-reassign': 'off',
+    'react/require-default-props': 'off',
   },
 };

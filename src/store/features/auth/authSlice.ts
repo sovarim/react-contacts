@@ -4,7 +4,7 @@ import api from '../api/apiSlice';
 
 const accessKey = '_rc_access';
 
-type AuthState = {
+export type AuthState = {
   token: string | null;
   isAuth: boolean;
 };
@@ -20,7 +20,13 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   initialState,
   name: 'auth',
-  reducers: {},
+  reducers: {
+    logout: (state) => {
+      localStorage.removeItem(accessKey);
+      state.isAuth = false;
+      state.token = null;
+    },
+  },
   extraReducers: (builder) => {
     builder.addMatcher(api.endpoints.login.matchFulfilled, (state, { payload }) => {
       localStorage.setItem(accessKey, payload.token);
@@ -29,6 +35,8 @@ const authSlice = createSlice({
     });
   },
 });
+
+export const { logout } = authSlice.actions;
 
 export const selectAuthState = (state: RootState) => state.auth;
 export const selectAuthToken = createSelector(selectAuthState, (authState) => authState.token);
