@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useAppSelector } from 'store';
 import ContactForm, { ContactFormChangeEvent, ContactFormSubmitEvent } from './ContactForm';
 import { ContactRequest, selectContactById, useUpdateContactMutation } from './contactsSlice';
@@ -8,7 +8,6 @@ type EditContactFormProps = {
   id: number | undefined;
 };
 
-// eslint-disable-next-line no-unused-vars
 const EditContactForm = ({ onAfterSubmit, id }: EditContactFormProps) => {
   const contact = useAppSelector((state) => selectContactById(state, id || -1));
   const [update, { isLoading, isError }] = useUpdateContactMutation();
@@ -46,4 +45,4 @@ const EditContactForm = ({ onAfterSubmit, id }: EditContactFormProps) => {
   );
 };
 
-export default EditContactForm;
+export default memo(EditContactForm);

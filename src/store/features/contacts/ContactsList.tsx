@@ -16,7 +16,7 @@ import {
   Typography,
   Button,
 } from '@mui/material';
-import { useMemo, useRef, useState } from 'react';
+import { memo, useMemo, useRef, useState } from 'react';
 import {
   selectAllContactsFromResultData,
   useGetContactsQuery,
@@ -137,4 +137,4 @@ const ContactsList = ({ filterText = '' }: ContactsListProps) => {
   );
 };
 
-export default ContactsList;
+export default memo(ContactsList);

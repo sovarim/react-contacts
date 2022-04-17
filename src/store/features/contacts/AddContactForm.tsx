@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import { useCreateContactMutation, ContactRequest } from './contactsSlice';
 import ContactForm, { ContactFormChangeEvent, ContactFormSubmitEvent } from './ContactForm';
 
@@ -42,4 +42,4 @@ const AddContactForm = ({ onAfterSubmit }: AddContactFormProps) => {
   );
 };
 
-export default AddContactForm;
+export default memo(AddContactForm);
