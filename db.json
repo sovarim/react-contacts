@@ -2,14 +2,16 @@
   "users": [
     {
       "id": 1,
-      "username": "ss",
-      "password": "testpassword"
-    },
-    {
-      "id": 2,
       "username": "test",
       "password": "testpassword"
     }
   ],
-  "contacts": []
+  "contacts": [
+    {
+      "name": "Test contact",
+      "phone": "+7 888 888 88 88",
+      "email": "test@mail.ru",
+      "id": 1
+    }
+  ]
 }
